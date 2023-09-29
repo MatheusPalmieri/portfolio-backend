@@ -14,7 +14,7 @@ app.use(express.json());
 import db from '../config/db';
 
 // Router
-import router from './router';
+const routes = require('./routes/routes');
 
 // Logger
 import Logger from '../config/logger';
@@ -24,7 +24,8 @@ import morganMiddleware from './middleware/morganMiddleware';
 
 app.use(morganMiddleware);
 
-app.use('/api/', router);
+// api routes
+app.use('/api', routes);
 
 // App port
 const port = config.get('port') as number;
