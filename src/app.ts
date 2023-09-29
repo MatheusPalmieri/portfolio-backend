@@ -1,8 +1,9 @@
 // ENV variables
-require("dotenv").config();
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
-import express from "express";
-import config from "config";
+import express from 'express';
+import config from 'config';
 
 const app = express();
 
@@ -10,23 +11,23 @@ const app = express();
 app.use(express.json());
 
 // Database
-import db from "../config/db";
+import db from '../config/db';
 
 // Router
-import router from "./router";
+import router from './router';
 
 // Logger
-import Logger from "../config/logger";
+import Logger from '../config/logger';
 
 // Morgan middleware
-import morganMiddleware from "./middleware/morganMiddleware";
+import morganMiddleware from './middleware/morganMiddleware';
 
 app.use(morganMiddleware);
 
-app.use("/api/", router);
+app.use('/api/', router);
 
 // App port
-const port = config.get("port") as number;
+const port = config.get('port') as number;
 
 app.listen(port, async () => {
   await db();

@@ -1,18 +1,18 @@
-import { Request, Response, NextFunction } from "express";
-import { validationResult } from "express-validator";
+import { Request, Response, NextFunction } from 'express';
+import { validationResult } from 'express-validator';
 
 export const validate = (req: Request, res: Response, next: NextFunction) => {
-    const errors = validationResult(req);
+  const errors = validationResult(req);
 
-    if(errors.isEmpty()) {
-        return next();
-    }
+  if (errors.isEmpty()) {
+    return next();
+  }
 
-    const extractErrors: object[] = []
+  const extractErrors: object[] = [];
 
-    errors.array().map((err: any) => extractErrors.push({ [err.param]: err.msg }));
+  errors.array().map((err: any) => extractErrors.push({ [err.param]: err.msg }));
 
-    return res.status(422).json({
-        errors: extractErrors,
-    });
+  return res.status(422).json({
+    errors: extractErrors,
+  });
 };
