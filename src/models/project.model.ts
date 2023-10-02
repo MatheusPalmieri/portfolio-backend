@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
 import { ProjectStatusEnum } from '../interfaces/project';
 
-const projectFrontendSchema = new Schema(
+const projectSchema = new Schema(
   {
     name: { type: String, required: true, trim: true },
     description: { type: String, required: true, trim: true },
@@ -19,6 +19,6 @@ const projectFrontendSchema = new Schema(
   },
 );
 
-export const ProjectFrontend = model('ProjectFrontend', projectFrontendSchema);
+export const Project = model('Project', projectSchema);
 
-module.exports = ProjectFrontend;
+module.exports = Project;

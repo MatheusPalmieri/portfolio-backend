@@ -1,1 +1,1 @@
-module.exports.ProjectFrontend = require('./project-frontend.model');
+module.exports.Project = require('./project.model');

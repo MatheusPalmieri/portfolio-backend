@@ -2,12 +2,11 @@ import { ProjectStatusEnum } from '../interfaces/project';
 import ApiError from '../utils/ApiError';
 
 const status = require('http-status');
-const { ProjectFrontend } = require('../models');
+const { Project } = require('../models');
 const projectValidation = require('../validations/project.validation');
 
-// Projects Frontend
 const getProjects = async (): Promise<Document | null> => {
-  const projects = await ProjectFrontend.find();
+  const projects = await Project.find();
   return projects;
 };
 
@@ -19,12 +18,12 @@ const createProject = async (project: {
   const slug = projectValidation.slugify(project.name);
   project.slug = slug;
 
-  const projectCreated = await ProjectFrontend.create(project);
+  const projectCreated = await Project.create(project);
   return projectCreated;
 };
 
 const getProject = async (id: string): Promise<Document | null> => {
-  const project = await ProjectFrontend.findById(id);
+  const project = await Project.findById(id);
   return project;
 };
 
@@ -32,7 +31,7 @@ const updateProject = async (
   id: string,
   project: { name?: string; description?: string },
 ): Promise<Document | null> => {
-  const projectUpdated = await ProjectFrontend.findByIdAndUpdate(id, project, { new: true });
+  const projectUpdated = await Project.findByIdAndUpdate(id, project, { new: true });
 
   if (!projectUpdated) {
     throw new ApiError(status.BAD_REQUEST, 'Projeto não encontrado.');
@@ -42,7 +41,7 @@ const updateProject = async (
 };
 
 const deleteProject = async (id: string): Promise<Document | null> => {
-  const projectDeleted = await ProjectFrontend.findOneAndUpdate(
+  const projectDeleted = await Project.findOneAndUpdate(
     { _id: id, status: { $nin: [ProjectStatusEnum.DELETED] } },
     {
       status: ProjectStatusEnum.DELETED,
@@ -58,9 +57,8 @@ const deleteProject = async (id: string): Promise<Document | null> => {
   return projectDeleted;
 };
 
-// Get event by slug
 const getProjectBySlug = async (slug: string): Promise<Document | null> => {
-  const project = await ProjectFrontend.findOne({ slug });
+  const project = await Project.findOne({ slug });
   return project;
 };
 

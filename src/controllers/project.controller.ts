@@ -4,7 +4,6 @@ import Logger from '../../config/logger';
 const catchAsync = require('../utils/catchAsync');
 const { projectService } = require('../services');
 
-// Projects Frontend
 const getProjects = catchAsync(async (req: Request, res: Response) => {
   try {
     const result = await projectService.getProjects();
@@ -55,7 +54,6 @@ const deleteProject = catchAsync(async (req: Request, res: Response) => {
   }
 });
 
-// Get event by slug
 const getProjectBySlug = catchAsync(async (req: Request, res: Response) => {
   try {
     const result = await projectService.getProjectBySlug(req.params.slug);
