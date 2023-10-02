@@ -1,22 +1,44 @@
 import { ProjectStatusEnum } from '../interfaces/project';
 import ApiError from '../utils/ApiError';
+import { generateRandomString } from '../utils/generateRandomString';
 
 const status = require('http-status');
 const { Project } = require('../models');
 const projectValidation = require('../validations/project.validation');
 
 const getProjects = async (): Promise<Document | null> => {
-  const projects = await Project.find();
+  const projects = await Project.find(
+    {},
+    {
+      description: 0,
+      status: 0,
+      createdAt: 0,
+      updatedAt: 0,
+      __v: 0,
+    },
+  );
   return projects;
 };
 
 const createProject = async (project: {
   name: string;
   description: string;
-  slug: null;
+  slug?: string;
 }): Promise<Document | null> => {
   const slug = projectValidation.slugify(project.name);
   project.slug = slug;
+
+  let uniqueSlugFound = false;
+
+  while (!uniqueSlugFound) {
+    const slugExist = await Project.findOne({ slug: project.slug });
+
+    if (slugExist) {
+      project.slug = `mp${generateRandomString(2)}-${project.slug}`;
+    } else {
+      uniqueSlugFound = true;
+    }
+  }
 
   const projectCreated = await Project.create(project);
   return projectCreated;
