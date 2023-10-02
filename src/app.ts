@@ -14,7 +14,7 @@ app.use(express.json());
 import db from '../config/db';
 
 // Router
-const routes = require('./routes/routes');
+const routes = require('./routes/index');
 
 // Logger
 import Logger from '../config/logger';

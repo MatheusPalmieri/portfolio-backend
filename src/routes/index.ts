@@ -1,6 +1,8 @@
 import { Router, Request, Response } from 'express';
 
 const router = Router();
+// Routes
+const projectRoute = require('./project.route');
 
 const defaultRoutes = [
   {
@@ -8,6 +10,10 @@ const defaultRoutes = [
     route: router.get('', (req: Request, res: Response) => {
       res.status(200).send('Server running!');
     }),
+  },
+  {
+    path: '/project',
+    route: projectRoute,
   },
 ];
 
