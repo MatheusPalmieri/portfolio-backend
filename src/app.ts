@@ -11,13 +11,13 @@ const app = express();
 app.use(express.json());
 
 // Database
-import db from './config/db';
+import db from '../config/db';
 
 // Router
 const routes = require('./routes/index');
 
 // Logger
-import Logger from './config/logger';
+import Logger from '../config/logger';
 
 // Morgan middleware
 import morganMiddleware from './middleware/morganMiddleware';

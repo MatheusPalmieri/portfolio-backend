@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Logger from '../config/logger';
+import Logger from '../../config/logger';
 
 const catchAsync = require('../utils/catchAsync');
 const { projectService } = require('../services');
