@@ -1,8 +1,8 @@
-const db = `${process.env.MONGO_DB_URL}/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority`;
+const urlDB = process.env.MONGO_DB_URL;
+const nameDB = process.env.MONGO_DB_NAME;
+const db = `${urlDB}/${nameDB}?retryWrites=true&w=majority`;
 
 export default {
   port: process.env.PORT,
   dbUri: db,
-  env: process.env.TYPE_OF_ENVIRONMENT,
-  NODE_ENV: process.env.TYPE_OF_ENVIRONMENT,
 };
