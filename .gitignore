@@ -14,7 +14,7 @@ dist
 dist-ssr
 
 
-# local env files
+# env files
 .env
 
 # build output
