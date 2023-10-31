@@ -4,6 +4,7 @@ require('dotenv').config();
 
 import express from 'express';
 import config from 'config';
+import cors from 'cors';
 
 const app = express();
 
@@ -24,7 +25,10 @@ import morganMiddleware from './middleware/morganMiddleware';
 
 app.use(morganMiddleware);
 
-// api routes
+// CORS
+app.use(cors({ origin: process.env.FRONTEND_URL }));
+
+// Api routes
 app.use('/api', routes);
 
 // App port
