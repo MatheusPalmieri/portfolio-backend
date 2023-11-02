@@ -26,8 +26,7 @@ import morganMiddleware from './middleware/morganMiddleware';
 app.use(morganMiddleware);
 
 // enable cors
-app.use(cors());
-app.options('*', cors());
+app.use(cors({ origin: process.env.FRONTEND_URL }));
 
 // Api routes
 app.use('/api', routes);
