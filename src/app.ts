@@ -23,6 +23,10 @@ import Logger from '../config/logger';
 // Morgan middleware
 import morganMiddleware from './middleware/morganMiddleware';
 
+// Cron jobs
+import job from './crons';
+job.start();
+
 app.use(morganMiddleware);
 
 // enable cors
@@ -37,5 +41,5 @@ const port = config.get('port') as number;
 app.listen(port, async () => {
   await db();
 
-  Logger.info(`Server running on port ${port}`);
+  Logger.info(`Server running on port ${port}.`);
 });
